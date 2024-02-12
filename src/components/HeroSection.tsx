@@ -25,7 +25,7 @@ export const HeroSection = () => {
         </span>
         <span className="">
           <mark className="bg-white md:bg-transparent">
-            We're a nonprofit with the mission to provide a free, world-class
+            We&apos;re a nonprofit with the mission to provide a free, world-class
             education for anyone, anywhere.
           </mark>
         </span>
