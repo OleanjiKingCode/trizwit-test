@@ -1,16 +1,28 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { RiSearch2Line } from "react-icons/ri";
 import { AiOutlineExport } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { syllabusesData } from "@/Data/syllabusesData";
+import { Syllabus } from "@/Data/syllabusesData";
 import { HiOutlineMenu } from "react-icons/hi";
+import axios from "axios";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [syllabuses, setSyllabuses] = useState<Syllabus[]>([]);
+
+  useEffect(() => {
+    // Fetch Syllabus data from the API route using Axios when the page loads
+    axios
+      .get<Syllabus[]>("/api/syllabuses")
+      .then((response) => setSyllabuses(response.data))
+      .catch((error) => console.error("Error fetching syllabuses:", error));
+  }, []);
+
   return (
     <>
       <div className="w-full hidden  md:flex flex-row items-center gap-3 border-b-[1px] border-slate-300 p-2  text-blue-500 font-medium">
+        {/* the dropdown of the courses of syllabuses */}
         <div className=" text-right">
           <Menu as="div" className="relative inline-block text-left">
             <div>
@@ -33,7 +45,7 @@ export const Navbar = () => {
             >
               <Menu.Items className="absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
                 <div className="px-1 py-1 ">
-                  {syllabusesData.map((items, i) => {
+                  {syllabuses.map((items, i) => {
                     return (
                       <Menu.Item key={i}>
                         <button
@@ -70,6 +82,7 @@ export const Navbar = () => {
         </div>
       </div>
       <div className="w-full flex  md:hidden flex-row items-center gap-3 border-b-[1px] border-slate-300 p-2  text-blue-500 font-medium">
+        {/* Changed the logo here text to the name of the company and test */}
         <div className="text-2xl w-full text-start pl-2">Trizwit test</div>
         <div
           className="bg-slate-200 gap-3 flex flex-row items-center justify-center py-2 px-3 rounded-md"

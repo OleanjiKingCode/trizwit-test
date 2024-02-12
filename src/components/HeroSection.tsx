@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
 
-export default function HeroSection() {
+export const HeroSection = () => {
   return (
     <div className="flex flex-row px-[10%] bg-girl md:bg-none bg-center bg-no-repeat bg-contain items-center justify-between">
+      {/* showing the this image only on medium screens and bigger */}
       <Image
         alt="testImage"
         src="/left.jpeg"
@@ -16,6 +17,7 @@ export default function HeroSection() {
           For every student, every classroom.{" "}
           <span className="border-b-[2px] border-gray-300">Real results.</span>
         </span>
+        {/* Highlighting the text like in the design only on small screen sizes */}
         <span className="block md:hidden text-2xl leading-10 font-semibold ">
           <mark className="bg-white md:bg-transparent">
             For every student, every classroom. Real results.
@@ -33,4 +35,4 @@ export default function HeroSection() {
       </div>
     </div>
   );
-}
+};
